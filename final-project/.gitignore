@@ -1,0 +1,24 @@
+#Jupyter Notebook
+.ipynb_checkpoints
+
+#Dataset and pretrained parameters
+core/data/datasets/*
+core/pretrained/*
+
+#LaTex
+*.aux
+*.log
+*.gz
+*.tex
+*.bib
+*.bbl
+*.blg
+*.out
+*.toc
+*.cls
+
+#Python
+__pycache__/
+
+#e3d Repository
+e3d/

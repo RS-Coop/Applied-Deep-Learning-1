@@ -1,0 +1,14 @@
+#Jupyter Notebook
+.ipynb_checkpoints
+
+#LaTex
+*.aux
+*.log
+*.gz
+*.tex
+*.bib
+*.bbl
+*.blg
+
+#Dataset
+waymo-training-0000/

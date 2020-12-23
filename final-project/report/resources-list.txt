@@ -1,0 +1,22 @@
+Sparse Convolutions:
+	Facebook Research:
+	https://github.com/facebookresearch/SparseConvNet
+	https://arxiv.org/abs/1711.10275
+	https://arxiv.org/abs/1711.10275
+	
+	Traveller59:
+	https://github.com/traveller59/spconv
+	https://github.com/traveller59/second.pytorch
+	
+	Minkowski:
+	https://github.com/NVIDIA/MinkowskiEngine
+	https://arxiv.org/pdf/1904.08755.pdf
+	
+	Han Lab:
+	https://github.com/mit-han-lab/torchsparse
+	https://github.com/mit-han-lab/e3d
+	https://arxiv.org/abs/2007.16100
+	
+	Google Research:
+	https://arxiv.org/abs/2004.01170
+	https://arxiv.org/abs/2007.12392

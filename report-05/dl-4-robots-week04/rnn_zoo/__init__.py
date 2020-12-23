@@ -1,0 +1,1 @@
+from rnn_zoo.train import run
