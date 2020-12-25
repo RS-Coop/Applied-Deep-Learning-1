@@ -11,12 +11,12 @@ Further references can be found in the paper in the *report* folder.
 
 ## Structure
 
+Some of the files and structure are quite self-explanatory, so I will only include the most important one.
+
 - core: All of the network code
 	- data: Datasets and associated loading functionality, note that the datasets are not provided here
 	- modules: Required pieces of e3d from the MIT Han Lab
-	- sparse\_rnn.py: Custom rnn modules with sparse functionality
-
-The rest of the files here should be pretty self-explanatory. 
+	- sparse\_rnn.py: Custom rnn modules with sparse functionality 
 
 - testing: This folder contains a few notebooks that consist of my testing random stuff out. There isn't much structure there so be warned.
 
