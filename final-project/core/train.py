@@ -3,7 +3,7 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
 
-from core.data.nuscenes import NuScenesDataset
+from core.data.dataset import Dataset
 
 class Trainer():
     #Some baseline training parameters
@@ -19,7 +19,7 @@ class Trainer():
     def __init__(self, num_classes=17):
         self.num_classes = num_classes
 
-    def train(self, model, dataroot, device, split='mini', num_epochs=1, 
+    def train(self, model, dataset, dataroot, device, split='mini', num_epochs=1, 
                 last_only=True, rnn=False):
 
         for param in model.parameters():
@@ -49,8 +49,8 @@ class Trainer():
         criterion = nn.CrossEntropyLoss(ignore_index=self.ignore_label)
 
         #Create our training dataset
-        train_dataset = NuScenesDataset(dataroot=dataroot,
-                        voxel_size=self.voxel_size, split=split, task='train')
+        train_dataset = Dataset(dataset=dataset, dataroot=dataroot,
+                            voxel_size=self.voxel_size, split=split, task='train')
 
         train_dataloader = DataLoader(
                             train_dataset,

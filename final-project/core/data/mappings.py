@@ -1,3 +1,6 @@
+'''
+NuScenes mappings
+'''
 #Mapping from nuscnes label to nuscenes name
 nuscenes_label2name = {
     0: 'noise', 
@@ -35,6 +38,7 @@ nuscenes_label2name = {
 }
 
 #Mapping from model label to name
+#I only keep a subset of the nuscenes labels
 model_label2name = {
     0: 'pedestrian',
     1: 'road',
@@ -56,6 +60,7 @@ model_label2name = {
 }
 
 #Mapping from nuscnes label to model label
+#nuscenes labels to my subset
 nuscenes2model = {
     0: 13,
     1: 14, 
@@ -91,7 +96,21 @@ nuscenes2model = {
     31: 6
 }
 
+#####################################################################################
+'''
+Semantic KITTI mappings
+'''
+#Mapping from semantic KITTI labels to kept model labels
+kitti2model = {
+
+}
+
+#####################################################################################
+'''
+SPVNAS mappings
+'''
 #Mapping from SPVNAS output to name
+#This is the mapping from the e3d SPVNAS Semantic KITTI
 spvnas_label2name = {
         0: 'car', 1: 'bicycle', 2: 'motorcycle', 3: 'truck', 4:
         'other-vehicle', 5: 'person', 6: 'bicyclist', 7: 'motorcyclist',
@@ -101,24 +120,53 @@ spvnas_label2name = {
     }
 
 #Mapping from SPVNAS to model
-spvnas2model{
-    0:,
-    1:,
-    2:,
-    3:,
-    4:,
-    5:,
-    6:,
-    7:,
-    8:,
-    9:,
-    10:,
-    11:,
-    12:,
-    13:,
-    14:,
-    15:,
-    16:,
-    17:,
-    18:,
+#From e3d to my labels
+spvnas2model = {
+    0: 6,
+    1: 8,
+    2: 9,
+    3: 7,
+    4: 16,
+    5: 0,
+    6: 8,
+    7: 9,
+    8: 1,
+    9: 1,
+    10: 2,
+    11: 12,
+    12: 5,
+    13: 15,
+    14: 11,
+    15: 11,
+    16: 4,
+    17: 15,
+    18: 15,
+}
+
+#Mapping from model labels to SPVNAS labels
+#
+'''
+Currently a few of the labels are mapped to 255 which is the ignore label.
+This is because there is no clear cut map, but it would be ideal to have
+multiple valid labels. Mostly this is just for some basic testing so its not too
+big of a deal.
+'''
+model2spvnas = {
+    0: 5,
+    1: 8,
+    2: 10,
+    3: 255,
+    4: 16,
+    5: 12,
+    6: 0,
+    7: 3,
+    8: 1,
+    9: 2,
+    10: 4,
+    11: 14,
+    12: 11,
+    13: 255,
+    14: 255,
+    15: 255,
+    16: 4
 }

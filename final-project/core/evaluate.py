@@ -3,7 +3,7 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
 
-from core.data.nuscenes import NuScenesDataset
+from core.data.dataset import Dataset
 
 class Evaluator():
     #Some baseline training parameters
@@ -47,7 +47,7 @@ class Evaluator():
         
         return np.mean(ious)
 
-    def evaluate(self, model, dataroot, device, split='mini'):
+    def evaluate(self, model, dataset, dataroot, device, split='mini', map_labels=False):
 
         #Reset for mIOU calculations
         self.reset()
@@ -55,8 +55,8 @@ class Evaluator():
         #Loss function
         criterion = nn.CrossEntropyLoss(ignore_index=self.ignore_label)
 
-        #Create our training dataset
-        val_dataset = NuScenesDataset(dataroot=dataroot,
+        #Create our validation dataset
+        val_dataset = Dataset(dataset=dataset, dataroot=dataroot, 
                         voxel_size=self.voxel_size, split=split, task='val')
 
         val_dataloader = DataLoader(
