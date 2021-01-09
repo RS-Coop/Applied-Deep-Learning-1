@@ -21,11 +21,17 @@ class Dataset(torch.utils.data.Dataset):
 
         if dataset == 'nuscenes':
             self.files, self.size = nuscenes.getFiles(dataroot+'/'+dataset, split, task)
-            self.labelmap = lambda x : nuscenes2model[x]
+            
+            self.label_map = np.zeros(32)
+            for key, val in nuscenes2model.items():
+                self.label_map[key] = val
 
         elif dataset == 'kitti':
             self.files, self.size = kitti.getFiles(dataroot+'/'+dataset, split, task)
-            self.label_map = lambda x : kitti2model[x]
+            
+            self.label_map = np.zeros(260)
+            for key, val in kitti2model.items():
+                self.label_map[key] = val
 
     def augment(self, pt_cloud):
         theta = np.random.uniform(0, 2*np.pi)
@@ -52,12 +58,14 @@ class Dataset(torch.utils.data.Dataset):
             pt_cloud = self.augment(pt_cloud)
 
         #Get the segmentation annotations
-        pc_labels = np.fromfile(self.files['labels'][idx], dtype=np.uint8)
+        if self.dataset == 'nuscenes':
+            pc_labels = np.fromfile(self.files['labels'][idx], dtype=np.uint8)
+        elif self.dataset == 'kitti':
+            pc_labels = np.fromfile(self.files['labels'][idx], dtype=np.uint32).reshape(-1)
+            pc_labels = (pc_labels & 0xFFFF).astype(np.uint8) #Only take lower 16 bits
 
         #Map the labels
-        for i, l in enumerate(pc_labels):
-            l = self.labelmap(l)
-            pc_labels[i] = l
+        pc_labels = self.label_map(pc_labels)
 
         #Create the voxelized point cloud coordinates
         voxels = np.round(pt_cloud / self.voxel_size).astype(np.int32)
@@ -68,7 +76,7 @@ class Dataset(torch.utils.data.Dataset):
         inds, vox_labels, inverse_map = sparse_quantize(voxels, pt_cloud, pc_labels,
                                                     return_index=True, 
                                                     return_invs=True,
-                                                    ignore_label=255)
+                                                    ignore_label=0)
         
         #If we have too many points scrap some of them
         if self.num_points != None:

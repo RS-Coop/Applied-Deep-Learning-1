@@ -40,20 +40,19 @@ nuscenes_label2name = {
 #Mapping from model label to name
 #I only keep a subset of the nuscenes labels
 model_label2name = {
-    0: 'pedestrian',
-    1: 'road',
-    2: 'sidewalk',
-    3: 'moveable-object',
-    4: 'terrain',
-    5: 'building',
-    6: 'car',
-    7: 'truck',
-    8: 'bicycle',
-    9: 'motorcycle',
-    10: 'bus',
-    11: 'vegetation',
-    12: 'ground',
-    13: 'noise',
+    1: 'pedestrian',
+    2: 'road',
+    3: 'sidewalk',
+    4: 'moveable-object',
+    5: 'terrain',
+    6: 'building',
+    7: 'car',
+    8: 'truck',
+    9: 'bicycle',
+    10: 'motorcycle',
+    11: 'bus',
+    12: 'vegetation',
+    13: 'ground',
     14: 'animal',
     15: 'static-object',
     16: 'vehicle-other'
@@ -62,111 +61,127 @@ model_label2name = {
 #Mapping from nuscnes label to model label
 #nuscenes labels to my subset
 nuscenes2model = {
-    0: 13,
+    0: 0,
     1: 14, 
-    2: 0, 
-    3: 0, 
-    4: 0, 
-    5: 0, 
-    6: 0, 
-    7: 0, 
-    8: 0, 
-    9: 3, 
-    10: 3, 
-    11: 3, 
-    12: 3, 
+    2: 1, 
+    3: 1, 
+    4: 1, 
+    5: 1, 
+    6: 1, 
+    7: 1, 
+    8: 1, 
+    9: 4, 
+    10: 4, 
+    11: 4, 
+    12: 4, 
     13: 15, 
-    14: 8, 
-    15: 10, 
-    16: 10, 
-    17: 6, 
+    14: 9, 
+    15: 11, 
+    16: 11, 
+    17: 7, 
     18: 16, 
-    19: 6, 
-    20: 6, 
-    21: 9, 
+    19: 7, 
+    20: 7, 
+    21: 10, 
     22: 16, 
-    23: 7, 
-    24: 1, 
-    25: 12, 
-    26: 2, 
-    27: 4, 
-    28: 5, 
-    29: 5, 
-    30: 11, 
-    31: 6
+    23: 8, 
+    24: 2, 
+    25: 13, 
+    26: 3, 
+    27: 5, 
+    28: 6, 
+    29: 15, 
+    30: 12, 
+    31: 0
 }
 
 #####################################################################################
 '''
 Semantic KITTI mappings
 '''
+#Mapping from semantic KITTI labels to name
+kitti_label2name = {
+    0 : "unlabeled",
+    1 : "outlier",
+    10: "car",
+    11: "bicycle",
+    13: "bus",
+    15: "motorcycle",
+    16: "on-rails",
+    18: "truck",
+    20: "other-vehicle",
+    30: "person",
+    31: "bicyclist",
+    32: "motorcyclist",
+    40: "road",
+    44: "parking",
+    48: "sidewalk",
+    49: "other-ground",
+    50: "building",
+    51: "fence",
+    52: "other-structure",
+    60: "lane-marking",
+    70: "vegetation",
+    71: "trunk",
+    72: "terrain",
+    80: "pole",
+    81: "traffic-sign",
+    99: "other-object",
+    252: "moving-car",
+    253: "moving-bicyclist",
+    254: "moving-person",
+    255: "moving-motorcyclist",
+    256: "moving-on-rails",
+    257: "moving-bus",
+    258: "moving-truck",
+    259: "moving-other-vehicle"
+}
+
+#Mapping from model label to name
+#Only keeping subset of all KITTI labels
+#This is the same as SPVNAS
+model_label2name= {
+    1: 'car', 2: 'bicycle', 3: 'motorcycle', 4: 'truck', 5:
+    'other-vehicle', 6: 'person', 7: 'bicyclist', 8: 'motorcyclist',
+    9: 'road', 10: 'parking', 11: 'sidewalk', 12: 'other-ground',
+    13: 'building', 14: 'fence', 15: 'vegetation', 16: 'trunk',
+    17: 'terrain', 18: 'pole', 19: 'traffic-sign'
+}
+
 #Mapping from semantic KITTI labels to kept model labels
 kitti2model = {
-
-}
-
-#####################################################################################
-'''
-SPVNAS mappings
-'''
-#Mapping from SPVNAS output to name
-#This is the mapping from the e3d SPVNAS Semantic KITTI
-spvnas_label2name = {
-        0: 'car', 1: 'bicycle', 2: 'motorcycle', 3: 'truck', 4:
-        'other-vehicle', 5: 'person', 6: 'bicyclist', 7: 'motorcyclist',
-        8: 'road', 9: 'parking', 10: 'sidewalk', 11: 'other-ground',
-        12: 'building', 13: 'fence', 14: 'vegetation', 15: 'trunk',
-        16: 'terrain', 17: 'pole', 18: 'traffic-sign'
-    }
-
-#Mapping from SPVNAS to model
-#From e3d to my labels
-spvnas2model = {
-    0: 6,
-    1: 8,
-    2: 9,
-    3: 7,
-    4: 16,
-    5: 0,
-    6: 8,
-    7: 9,
-    8: 1,
-    9: 1,
-    10: 2,
-    11: 12,
-    12: 5,
-    13: 15,
-    14: 11,
-    15: 11,
-    16: 4,
-    17: 15,
-    18: 15,
-}
-
-#Mapping from model labels to SPVNAS labels
-#
-'''
-Currently a few of the labels are mapped to 255 which is the ignore label.
-This is because there is no clear cut map, but it would be ideal to have
-multiple valid labels. Mostly this is just for some basic testing so its not too
-big of a deal.
-'''
-model2spvnas = {
-    0: 5,
-    1: 8,
-    2: 10,
-    3: 255,
-    4: 16,
-    5: 12,
-    6: 0,
-    7: 3,
-    8: 1,
-    9: 2,
-    10: 4,
-    11: 14,
-    12: 11,
-    13: 255,
-    14: 255,
-    15: 255,
-    16: 4
+    0 : 0,     # "unlabeled"
+    1 : 0,     # "outlier" mapped to "unlabeled" --------------------------mapped
+    10: 1,     # "car"
+    11: 2,     # "bicycle"
+    13: 5,     # "bus" mapped to "other-vehicle" --------------------------mapped
+    15: 3,     # "motorcycle"
+    16: 5,     # "on-rails" mapped to "other-vehicle" ---------------------mapped
+    18: 4,     # "truck"
+    20: 5,     # "other-vehicle"
+    30: 6,     # "person"
+    31: 7,     # "bicyclist"
+    32: 8,     # "motorcyclist"
+    40: 9,     # "road"
+    44: 10,    # "parking"
+    48: 11,    # "sidewalk"
+    49: 12,    # "other-ground"
+    50: 13,    # "building"
+    51: 14,    # "fence"
+    52: 0,     # "other-structure" mapped to "unlabeled" ------------------mapped
+    60: 9,     # "lane-marking" to "road" ---------------------------------mapped
+    70: 15,    # "vegetation"
+    71: 16,    # "trunk"
+    72: 17,    # "terrain"
+    80: 18,    # "pole"
+    81: 19,    # "traffic-sign"
+    99: 0,     # "other-object" to "unlabeled" ----------------------------mapped
+    252: 1,    # "car"
+    253: 2,    # "bicyclist"
+    254: 6,    # "person"
+    255: 8,    # "motorcyclist"
+    256: 5,    # "other-vehicle" ------mapped
+    257: 5,    # "other-vehicle" -----------mapped
+    258: 4,    # "truck"
+    259: 5    # "other-vehicle"
 }

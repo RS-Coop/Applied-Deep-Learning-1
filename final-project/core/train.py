@@ -7,7 +7,7 @@ from core.data.dataset import Dataset
 
 class Trainer():
     #Some baseline training parameters
-    ignore_label = 255
+    ignore_label = 0
     voxel_size = 0.05
     batch_size = 2
     learn_rate = 0.01 #2.4e-1

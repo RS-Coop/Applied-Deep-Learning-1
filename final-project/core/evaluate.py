@@ -7,7 +7,7 @@ from core.data.dataset import Dataset
 
 class Evaluator():
     #Some baseline training parameters
-    ignore_label = 255
+    ignore_label = 0
     voxel_size = 0.05
     batch_size = 1
     num_workers = 4

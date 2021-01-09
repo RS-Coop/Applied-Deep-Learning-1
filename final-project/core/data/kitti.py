@@ -23,12 +23,16 @@ def getFiles(self, dataroot, voxel_size, split='mini', task='train'):
     pc_label_files = [] #Contains lidar label file paths
 
     #Extract lidar data and labels
+    #We are making the assumption that there are the
+    #same number of label and data files... which there is
     for scene_name in split_map[split][task]:
         root = dataroot + '/data/' + scene_name
         
-        for filename in os.listdir(root+'/velodyne'):
-            pc_data_files.append(root+'/velodyne/'+filename)
-            pc_label_files.append(root+'/labels/'+filename)
+        data_root = root+'/velodyne/'
+        label_root = root+'/labels/'
+        for filename in os.listdir(data_root):
+            pc_data_files.append(data_root+filename)
+            pc_label_files.append(label_root+filename.replace('bin', '.label'))
 
             size += 1
 
