@@ -16,7 +16,7 @@ Collects all the proper files for data and labels.
 Returns a dictionary of data->data files, labels->label files,
 and the size of the dataset.
 '''
-def getFiles(self, dataroot, split='mini', task='train'):
+def getFiles(dataroot, split='mini', task='train'):
     #Make sure split is valid
     assert split in split_map.keys()
     assert task in ['train', 'test', 'val']

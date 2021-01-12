@@ -5,14 +5,15 @@ from torchsparse import SparseTensor
 from torchsparse.utils import sparse_collate_fn, sparse_quantize
 
 from core.data.mappings import *
-import core.data.nuscenes
-import core.data.kitti
+import core.data.nuscenes as nuscenes
+import core.data.kitti as kitti
 
 class Dataset(torch.utils.data.Dataset):
     def __init__(self, dataset, dataroot, voxel_size, split='mini', task='train', 
                     num_points=None, augment=False, mean=False):
 
         #Copy input parameters
+        self.dataset = dataset
         self.task = task
         self.voxel_size = voxel_size
         self.num_points = num_points
@@ -49,23 +50,26 @@ class Dataset(torch.utils.data.Dataset):
     
     def __getitem__(self, idx):
         #Get the point cloud data
-        #Note: The fourth dimension is intensity
-        pt_cloud = np.fromfile(self.files['data'][idx], 
+        #Get the segmentation annotations
+        if self.dataset == 'nuscenes':
+            #Note: The fourth dimension will get replaced
+            pt_cloud = np.fromfile(self.files['data'][idx], 
                                 dtype=np.float32).reshape((-1,5))[:,:4]
+
+            pc_labels = np.fromfile(self.files['labels'][idx], dtype=np.uint8)
+        elif self.dataset == 'kitti':
+            pt_cloud = np.fromfile(self.files['data'][idx], 
+                                dtype=np.float32).reshape((-1,4))
+
+            pc_labels = np.fromfile(self.files['labels'][idx], dtype=np.uint32).reshape(-1)
+            pc_labels = (pc_labels & 0xFFFF).astype(np.uint8) #Only take lower 16 bits
 
         #Augment that data
         if self.augment and train in self.split:
             pt_cloud = self.augment(pt_cloud)
 
-        #Get the segmentation annotations
-        if self.dataset == 'nuscenes':
-            pc_labels = np.fromfile(self.files['labels'][idx], dtype=np.uint8)
-        elif self.dataset == 'kitti':
-            pc_labels = np.fromfile(self.files['labels'][idx], dtype=np.uint32).reshape(-1)
-            pc_labels = (pc_labels & 0xFFFF).astype(np.uint8) #Only take lower 16 bits
-
         #Map the labels
-        pc_labels = self.label_map(pc_labels)
+        pc_labels = self.label_map[pc_labels]
 
         #Create the voxelized point cloud coordinates
         voxels = np.round(pt_cloud / self.voxel_size).astype(np.int32)
