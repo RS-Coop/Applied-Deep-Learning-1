@@ -28,17 +28,13 @@ if __name__=='__main__':
     params = torch.load('core/pretrained/init{}'.format(net_id),
                         map_location=device)['model']
 
+    #If working with nuscenes change number of classes
+    #and delete the classifier weights as they wont match.
     if dataset == 'nuscenes':
-        net_config['num_classes'] = 17
-
-    # #If we have a different number of classes then
-    # #delete the saved classifier weights and we 
-    # #will retrain these.
-    # if net_config['num_classes'] != num_classes:
-    #     net_config['num_classes'] = num_classes
-    #     del params['classifier.linear.weight']
-    #     del params['classifier.linear.bias']
-
+        net_config['num_classes'] = 16
+        del params['classifier.linear.weight']
+        del params['classifier.linear.bias']
+        
     #Build the network
     if rnn:
         model = SPVRnn(net_config, params, device)
