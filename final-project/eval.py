@@ -6,7 +6,7 @@ from core.model import SPVStd, SPVRnn
 from core.evaluate import Evaluator
 
 #Global model choices
-net_id = '@20' #This is the smaller SPVNAS
+net_id = '@20' #This is the smaller SPVNAS model
 rnn = False
 split = 'trainval'
 dataroot = 'core/data/datasets'

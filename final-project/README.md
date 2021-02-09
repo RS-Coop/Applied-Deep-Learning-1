@@ -1,4 +1,4 @@
-# Final Project: Sparse Recurrent CNNs for 3D Point Cloud Semantic Segmentation
+# Sparse Recurrent CNNs for 3D Point Cloud Semantic Segmentation
 In this project I examine sparse 3D CNNs equipped with a recurrent module for the task of semantic segmentation and object detection in sequential LiDAR data. Note this project is still a work in progress.
 
 ## References and Inspiration
@@ -11,15 +11,15 @@ The idea for the use of recurrent layers is partly inspired by the work of Rui H
 Further references can be found in the paper in the *report* folder.
 
 ## Structure
-Some of the files and structure are quite self-explanatory, so I will only include the most important one.
+Much of the structure and some of the files are quite self-explanatory, so I will discuss only that which is most important.
 
 - core: All of the nueral network code
-	- data: Datasets and associated loading functionality. Note that the actual data is much too large to provide here. Details on the nuscenes dataset can be found [here](https://www.nuscenes.org/nuscenes), and the SemanticKITTI dataset [here](http://www.semantic-kitti.org/).
+	- *data*: Datasets and associated loading functionality. Note that the actual data is much too large to provide here. Details (including download information) on the nuscenes dataset can be found [here](https://www.nuscenes.org/nuscenes), and the SemanticKITTI dataset [here](http://www.semantic-kitti.org/).
 	- modules: Required pieces of e3d from the MIT Han Lab.
-	- sparse\_rnn.py: Custom rnn modules with sparse functionality.
+	- sparse\_rnn.py: Custom rnn modules with sparse functionality. Yet to be implemented.
 
-- *.ipynb: These are a number of Jupyter Notebooks which were used for testing various components -- they can mostly be ignored.
+- **.ipynb*: These are a number of Jupyter Notebooks which were used for testing various components -- they can mostly be ignored.
 
-- report: This folder contains all my official report materials. Specifically, there is a pdf (*main*) and a notebook which produces the plots.
+- *report*: This folder contains all my official report materials. Specifically, there is a pdf (*main*) and a notebook which produces the plots.
 
-- main.py: You can run this file to try training and then evaluating a model usng the nuScenes or SemanticKITTI datasets. Parameters can be changed inside.
+- *main.py*: You can run this file to try training and then evaluating a model usng the nuScenes or SemanticKITTI datasets. Parameters can be changed inside.
