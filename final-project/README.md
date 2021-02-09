@@ -13,7 +13,7 @@ Further references can be found in the paper in the *report* folder.
 ## Structure
 Much of the structure and some of the files are quite self-explanatory, so I will discuss only that which is most important.
 
-- core: All of the nueral network code
+- *core*: All of the nueral network code
 	- *data*: Datasets and associated loading functionality. Note that the actual data is much too large to provide here. Details (including download information) on the nuscenes dataset can be found [here](https://www.nuscenes.org/nuscenes), and the SemanticKITTI dataset [here](http://www.semantic-kitti.org/).
 	- modules: Required pieces of e3d from the MIT Han Lab.
 	- sparse\_rnn.py: Custom rnn modules with sparse functionality. Yet to be implemented.
